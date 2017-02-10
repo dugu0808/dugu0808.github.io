@@ -3,10 +3,10 @@
   <channel>
     <title>Liu Ke Blog</title>
     <description>Cool Blog</description>
-    <link>http://localhost:4000/</link>
-    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Fri, 10 Feb 2017 11:35:47 +0800</pubDate>
-    <lastBuildDate>Fri, 10 Feb 2017 11:35:47 +0800</lastBuildDate>
+    <link>http://localhost:4000/blog/</link>
+    <atom:link href="http://localhost:4000/blog/feed.xml" rel="self" type="application/rss+xml" />
+    <pubDate>Fri, 10 Feb 2017 12:32:27 +0800</pubDate>
+    <lastBuildDate>Fri, 10 Feb 2017 12:32:27 +0800</lastBuildDate>
     <generator>Jekyll v3.3.1</generator>
     
       <item>
@@ -73,8 +73,8 @@
 译者 &lt;a href=&quot;http://weibo.com/huxpro&quot;&gt;黄玄&lt;/a&gt;，首次发布于 &lt;a href=&quot;http://huangxuan.me&quot;&gt;Hux Blog&lt;/a&gt;，转载请保留以上链接&lt;/p&gt;
 </description>
         <pubDate>Tue, 22 Sep 2015 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/2015/09/22/js-version/</link>
-        <guid isPermaLink="true">http://localhost:4000/2015/09/22/js-version/</guid>
+        <link>http://localhost:4000/blog/2015/09/22/js-version/</link>
+        <guid isPermaLink="true">http://localhost:4000/blog/2015/09/22/js-version/</guid>
         
         <category>前端开发</category>
         
@@ -120,8 +120,8 @@
 &lt;p&gt;&lt;a href=&quot;http://lab.hakim.se/reveal-js&quot;&gt;Reveal.js&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Thu, 09 Jul 2015 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/2015/07/09/js-module-7day/</link>
-        <guid isPermaLink="true">http://localhost:4000/2015/07/09/js-module-7day/</guid>
+        <link>http://localhost:4000/blog/2015/07/09/js-module-7day/</link>
+        <guid isPermaLink="true">http://localhost:4000/blog/2015/07/09/js-module-7day/</guid>
         
         <category>前端开发</category>
         
@@ -447,8 +447,8 @@
 &lt;/blockquote&gt;
 </description>
         <pubDate>Mon, 25 May 2015 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/2015/05/25/js-module-loader/</link>
-        <guid isPermaLink="true">http://localhost:4000/2015/05/25/js-module-loader/</guid>
+        <link>http://localhost:4000/blog/2015/05/25/js-module-loader/</link>
+        <guid isPermaLink="true">http://localhost:4000/blog/2015/05/25/js-module-loader/</guid>
         
         <category>前端开发</category>
         
@@ -735,8 +735,8 @@ Android’s source code is released by Google under open source licenses, althou
 &lt;p&gt;For Detail, Chromium OS based on &lt;a href=&quot;http://en.wikipedia.org/wiki/Gentoo_Linux&quot;&gt;Gentoo Linux&lt;/a&gt;, emm…&lt;/p&gt;
 </description>
         <pubDate>Tue, 14 Apr 2015 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/2015/04/14/unix-linux-note/</link>
-        <guid isPermaLink="true">http://localhost:4000/2015/04/14/unix-linux-note/</guid>
+        <link>http://localhost:4000/blog/2015/04/14/unix-linux-note/</link>
+        <guid isPermaLink="true">http://localhost:4000/blog/2015/04/14/unix-linux-note/</guid>
         
         <category>OS</category>
         

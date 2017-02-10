@@ -6,7 +6,7 @@ email: 450234523@qq.com
 description: "Cool Blog"
 keyword: "Blog"
 url: "http://keliu.me"              # your host, for absolute URL
-baseurl: "/blog"         # for example, '/blog' if your blog hosted on 'host/blog'
+baseurl: "/dugu0808.github.io"         # for example, '/blog' if your blog hosted on 'host/blog'
 
 
 
@@ -90,5 +90,3 @@ friends: [
     }
 ]
 
-source:      _source
-destination: _deplo

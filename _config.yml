@@ -3,7 +3,7 @@ title: Liu Ke Blog
 SEOTitle: 刘科的博客 | Liu Ke Blog
 header-img: img/home-bg.jpg
 email: 450234523@qq.com
-description: "探索神秘的世界"
+description: "探索神秘的未知世界"
 keyword: "Blog"
 url: "http://keliu.me"              # your host, for absolute URL
 baseurl: "/dugu0808.github.io"         # for example, '/blog' if your blog hosted on 'host/blog'
@@ -68,7 +68,7 @@ ba_track_id: 5746cfa08ef374a863b672ee41fc77dc
 
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.
-sidebar-about-description: "一个刚刚入门的程序员，写写代码，享受生活。"
+sidebar-about-description: "刚刚入门，摸索前进。"
 sidebar-avatar: /img/avatar-ke.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
 
 
@@ -90,4 +90,3 @@ friends: [
         href: "http://cnblogs.com/commence"
     }
 ]
-

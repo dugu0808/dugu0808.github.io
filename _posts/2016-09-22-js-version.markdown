@@ -2,8 +2,8 @@
 layout:     post
 title:      "Example Post"
 subtitle:   "ES5, ES6, ES2016, ES.Next: What's going on with JavaScript versioning?"
-date:       2015-09-22
-author:     "Hux"
+date:       2016-09-22
+author:     "Liu Ke"
 header-img: "img/post-bg-js-version.jpg"
 tags:
     - 前端开发
@@ -60,7 +60,4 @@ JavaScript 有着很奇怪的命名史。
 <img class="shadow" width="320" src="/img/in-post/post-js-version/keep-calm-and-learn-javascript.png" />
 <small class="img-hint">来学 JavaScript 吧！</small>
 
-#### 著作权声明
 
-本文译自 [ES5, ES6, ES2016, ES.Next: What's going on with JavaScript versioning?](http://benmccormick.org/2015/09/14/es5-es6-es2016-es-next-whats-going-on-with-javascript-versioning/)   
-译者 [黄玄](http://weibo.com/huxpro)，首次发布于 [Hux Blog](http://huangxuan.me)，转载请保留以上链接

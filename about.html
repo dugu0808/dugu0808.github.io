@@ -120,6 +120,13 @@ header-img: "img/about-bg.jpg"
 <!-- disqus 公共JS代码 end -->
 {% endif %}
 
+{% if site.livere_uid %}
+<!-- livere 评论框 start -->
+<div class="comment">
+     <div id="lv-container" data-id="city" data-uid="{{ site.livere_uid }}"></div>
+</div>
+<!-- livere 评论框 end -->
+
 <!-- livere 公共JS代码 start (一个网页只需插入一次) -->
 <script type="text/javascript">
      (function(d, s) {

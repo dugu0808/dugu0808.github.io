@@ -2,7 +2,7 @@
 layout:     post
 title:      "拜占庭共识机制"
 subtitle:   "区块链学习笔记"
-date:       2016-04-14
+date:       2017-11-11
 author:     "Liu Ke"
 header-img: "img/in-post/Byzantine.jpg"
 tags:

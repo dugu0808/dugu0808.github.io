@@ -72,10 +72,11 @@ Invoke(stub ChaincodeStubInterface) pb.Response
 
 - `Invoke`:当链码收到调用（invoke）或查询（query）类型的交易时，Invoke方法会被调用。
 
-###链码结构
+### 链码结构
+
 一个链码的必要结构如下所示，在其中利用`shim.ChaincodeStubInterface`结构，实现跟账本的交互逻辑：
 
-```go
+
 > package main
 > 
 > //引入必要的包
@@ -85,7 +86,7 @@ Invoke(stub ChaincodeStubInterface) pb.Response
 > 	"github.com/hyperledger/fabric/core/chaincode/shim"
 > 
 > 	pb "github.com/hyperledger/fabric/protos/peer"
-> 
+>
 > )
 > 
 > //声明一个结构体
@@ -127,4 +128,3 @@ Invoke(stub ChaincodeStubInterface) pb.Response
 > 
 > }
 
-```

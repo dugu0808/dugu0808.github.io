@@ -55,16 +55,16 @@ Fabric中大量采用了gRPC消息在不同组件之间进行通信交互，主�
 ### Chaincode接口
 Fabric中为链码提供了很好的封装支持，编写链码还是相对比较简单。以Golang为例，每个链码都需要实现以下Chaincode接口：
 
-```
-type Chaincode interface{
 
-Init(stub ChaincodeStubInterface) pb.Response
+    type Chaincode interface{
+    
+    	Init(stub ChaincodeStubInterface) pb.Response
+    
+    	Invoke(stub ChaincodeStubInterface) pb.Response
+    
+	}
 
-Invoke(stub ChaincodeStubInterface) pb.Response
 
-}
-
-```
 
 其中:
 
@@ -77,54 +77,54 @@ Invoke(stub ChaincodeStubInterface) pb.Response
 一个链码的必要结构如下所示，在其中利用`shim.ChaincodeStubInterface`结构，实现跟账本的交互逻辑：
 
 
-> package main
-> 
-> //引入必要的包
-> 
-> import(
-> 
-> 	"github.com/hyperledger/fabric/core/chaincode/shim"
-> 
-> 	pb "github.com/hyperledger/fabric/protos/peer"
->
-> )
-> 
-> //声明一个结构体
-> 
-> type SimpleChaincode struct {}
-> 
-> 
-> //为结构体添加Init方法
-> 
-> func (t *SimpleChaincode) Init(stub shim.ChaincodeStubInterface) pb.Response{
-> 
-> 	//在该方法中实现链码运行中初始化或升级的处理逻辑
-> 
-> 	//编写时可灵活使用stub中的API
-> 
-> }
-> 
-> //为结构体添加Invoke方法
-> 
-> func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface) pb.Response{
-> 
-> 	//在该方法中实现链码运行中被调用或查询时的处理逻辑
-> 
-> 	//编写时可灵活使用stub中的API
-> 
-> }
-> 
-> //主函数，需要调用shim.Start()方法
-> 
-> func main() {
-> 
-> 	err := shim.Start(new(SimpleChaincode))
-> 
-> 	if err != nil {
-> 
-> 		fmt.Printf("Error start Simple chaincode : %s", err)
-> 
-> 	}
-> 
-> }
+    package main
+    
+    //引入必要的包
+    
+    import(
+    
+    	"github.com/hyperledger/fabric/core/chaincode/shim"
+    
+    	pb "github.com/hyperledger/fabric/protos/peer"
+    
+    )
+    
+    //声明一个结构体
+    
+    type SimpleChaincode struct {}
+    
+    
+    //为结构体添加Init方法
+    
+    func (t *SimpleChaincode) Init(stub shim.ChaincodeStubInterface) pb.Response{
+    
+    	//在该方法中实现链码运行中初始化或升级的处理逻辑
+    
+    	//编写时可灵活使用stub中的API
+    
+    }
+    
+    //为结构体添加Invoke方法
+    
+    func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface) pb.Response{
+    
+    	//在该方法中实现链码运行中被调用或查询时的处理逻辑
+    
+    	//编写时可灵活使用stub中的API
+    
+    }
+    
+    //主函数，需要调用shim.Start()方法
+    
+    func main() {
+    
+    	err := shim.Start(new(SimpleChaincode))
+    
+    	if err != nil {
+    
+    		fmt.Printf("Error start Simple chaincode : %s", err)
+    
+    	}
+    
+    }
 

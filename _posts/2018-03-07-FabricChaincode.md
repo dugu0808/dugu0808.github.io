@@ -79,32 +79,52 @@ Invoke(stub ChaincodeStubInterface) pb.Response
 package main
 
 //引入必要的包
+
 import(
+
 	"github.com/hyperledger/fabric/core/chaincode/shim“
+
 	pb "github.com/hyperledger/fabric/protos/peer"
+
 )
 
 //声明一个结构体
+
 type SimpleChaincode struct {}
 
+
 //为结构体添加Init方法
+
 func (t *SimpleChaincode) Init(stub shim.ChaincodeStubInterface) pb.Response{
+
 	//在该方法中实现链码运行中初始化或升级的处理逻辑
+
 	//编写时可灵活使用stub中的API
+
 }
 
 //为结构体添加Invoke方法
+
 func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface) pb.Response{
+
 	//在该方法中实现链码运行中被调用或查询时的处理逻辑
+
 	//编写时可灵活使用stub中的API
+
 }
 
 //主函数，需要调用shim.Start()方法
+
 func main() {
+
 	err := shim.Start(new(SimpleChaincode))
+
 	if err != nil {
+
 		fmt.Printf("Error start Simple chaincode : %s", err)
+
 	}
+
 }
 
 ```

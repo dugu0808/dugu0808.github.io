@@ -128,3 +128,10 @@ Fabric中为链码提供了很好的封装支持，编写链码还是相对比�
     
     }
 
+链码需要引入如下的依赖包：
+
+- `"github.com/hyperledger/fabric/core/chaincode/shim"`：`shim`包提供了链码与账本交互的中间层。链码通过`shim.ChaincodeStub`提供的方法来读取和修改账本状态。
+
+- `pb "github.com/hyperledger/fabric/protos/peer"`：`Init`和`Invoke`方法需要返回`pb.Response`类型
+
+编写链码关键的就是`Init`和`Invoke`这两个方法。当部署或升级链码时，`Init`方法会被调用，用来完成一些初始化工作。当通过调用链码做一些实际工作时，`Invoke`方法被调用，响应调用或查询的业务逻辑都需要在`Invoke`方法中实现。`Init`或`Invoke`方法以`stub shim.ChaincodeStubInterface`作为传入参数，`pb.Response`作为返回类型。其中，`stub`包含丰富的API，包块对账本进行操作、读取交易参数、调用其他链码等。

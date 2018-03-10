@@ -20,7 +20,7 @@ tags:
 
 链码会对Fabric应用程序发送的交易做出响应，执行代码逻辑，与账本进行交互。区块链网络中的成员商定业务逻辑后，可将业务逻辑编程到链码中，然后大家遵循合约来执行。
 
-链码会创建一些状态（state）并写入账本中。状态带有绑定到链码的命名空间，并且仅限于创建它的的链码所使用，不能被其他链码直接访问。但是，在合适的许可范围内，一个链码也可以调用另一个链码，间接访问其状态。另外，在一些场景下，不仅需要访问状态的当前值，还需要能够查询状态所有历史值，这就存放账本状态的数据库提出了更多的要求。
+链码会创建一些状态（state）并写入账本中。状态带有绑定到链码的命名空间，并且仅限于创建它的链码所使用，不能被其他链码直接访问。但是，在合适的许可范围内，一个链码也可以调用另一个链码，间接访问其状态。另外，在一些场景下，不仅需要访问状态的当前值，还需要能够查询状态所有历史值，这就存放账本状态的数据库提出了更多的要求。
 
 链码最核心的机构为`ChaincodeSpec`，对链码的部署和调用都基于该结构进行进一步封装（`ChaincodeDeploymentSpec`和`ChaincodeInvocationSpec`）,链码信息至少需要指定名称、版本号和实例化策略。
 
@@ -43,7 +43,7 @@ Fabric中大量采用了gRPC消息在不同组件之间进行通信交互，主�
 
 - 多个Peer节点之间的通信
 
-对于链码容器和Peer节点之间的操作，链码容器启动后，会向Peer节点进行注册，gRPC地址为`/protos.ChaincodeSupport/Register`。消息为ChaincodeMessage结构，如下图所示。（定义在`protos/peer/chaincode_shim.proto`文件）。其中，Payload域中可以包括各种Chaincode操作消息，如`GetHistoryForKey`、`GetQueryResult`、`PutStateInfo`、`GetStateByRange`等。
+对于链码容器和Peer节点之间的操作，链码容器启动后，会向Peer节点进行注册，gRPC地址为`/protos.ChaincodeSupport/Register`。消息为ChaincodeMessage结构，如下图所示。`Type`为消息类型，`TxId`为关联交易的ID，`Payload`中存储消息内容。（定义在`protos/peer/chaincode_shim.proto`文件）。其中，Payload域中可以包括各种Chaincode操作消息，如`GetHistoryForKey`、`GetQueryResult`、`PutStateInfo`、`GetStateByRange`等。
 注册完成后，双方建立起双工通道，通过更多消息类型来实现多种交互。
 
 ![](https://raw.githubusercontent.com/dugu0808/dugu0808.github.io/master/img/in-post/180307/ChaincodeMessage%E6%B6%88%E6%81%AF%E7%BB%93%E6%9E%84.png)
@@ -135,3 +135,27 @@ Fabric中为链码提供了很好的封装支持，编写链码还是相对比�
 - `pb "github.com/hyperledger/fabric/protos/peer"`：`Init`和`Invoke`方法需要返回`pb.Response`类型
 
 编写链码关键的就是`Init`和`Invoke`这两个方法。当部署或升级链码时，`Init`方法会被调用，用来完成一些初始化工作。当通过调用链码做一些实际工作时，`Invoke`方法被调用，响应调用或查询的业务逻辑都需要在`Invoke`方法中实现。`Init`或`Invoke`方法以`stub shim.ChaincodeStubInterface`作为传入参数，`pb.Response`作为返回类型。其中，`stub`包含丰富的API，包块对账本进行操作、读取交易参数、调用其他链码等。
+
+### 链码与Peer的交互
+
+用户链码目前运行在Docker容器中，跟Peer节点之间通过gRPC通道进行通信，双方通过ChaincodeMessage消息进行交互。消息为ChaincodeMessage结构, Type为消息类型，TxId为关联交易的ID，Payload中存储消息内容。
+
+![](https://raw.githubusercontent.com/dugu0808/dugu0808.github.io/master/img/in-post/180307/ChaincodeMessage%E6%B6%88%E6%81%AF%E7%BB%93%E6%9E%84.png)
+
+用户链码容器和所属Peer节点的主要交互过程如图：
+
+![](https://raw.githubusercontent.com/dugu0808/dugu0808.github.io/master/img/in-post/180307/%E9%93%BE%E7%A0%81%E6%B6%88%E6%81%AF%E4%BA%A4%E4%BA%92.png)
+
+消息类型有如上图所示的十几种消息类型，负责整个用户链码的完整生命周期。一般情况下，链码从注册到Peer开始，一直到被调用，主要步骤同样如图所示。
+
+### 链码基本工作原理
+
+首先，用户通过客户端（SDK或CLI），Fabric的背书节点（endorser）发出调用链码的交易提案（proposal）。节点对提案进行包括ACL权限检查在内的各种检验，通过后则创建模拟执行这一交易的环境。
+
+之后，节点和链码容器之间通过gRPC消息来交互，模拟执行交易并给出背书结论。两者之间采用ChaincodeMessage消息。
+
+链码容器的shim层则是节点与链码交互的中间层。当链码的代码逻辑需要读写账本时，链码会通过shim层发送相应操作类型的ChaincodeMessage给节点，节点本地操作账本后返回相应消息。
+
+客户端收到足够的背书节点的支持后，便可以将这笔交易发送给排序节点（orderer）进行排序，并最终写入区块链。
+
+

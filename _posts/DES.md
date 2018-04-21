@@ -2,7 +2,7 @@
 layout:     post
 title:      "DES算法"
 subtitle:   "密码学学习笔记"
-date:       2018-04-01
+date:       2018-04-21
 author:     "Liu Ke"
 header-img: "img/in-post/cryptology.jpg"
 tags:

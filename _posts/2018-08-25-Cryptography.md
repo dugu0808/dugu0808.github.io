@@ -10,6 +10,8 @@ tags:
 ---
 <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
 
+> This document is not completed and will be updated anytime.
+
 ## 1. 密码
 
 ### 1.1 密码技术

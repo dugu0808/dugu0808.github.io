@@ -6,7 +6,7 @@ date:       2017-11-11
 author:     "Liu Ke"
 header-img: "img/in-post/Byzantine.jpg"
 tags:
-    - Blockchain区块链
+    - 共识算法
     
 ---
 

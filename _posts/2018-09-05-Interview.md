@@ -58,7 +58,7 @@ tags:
 
 ```c
 const char *p = &10;
-		   *p = NULL;
+	*p = NULL;
 ```
 
 

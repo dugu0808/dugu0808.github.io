@@ -29,7 +29,7 @@ $ ./nodeos -e -p eosio --plugin eosio::chain_api_plugin --plugin eosio::history_
 
 启动节点的命令相对来说比较复杂，通过查看config.ini文件可以发现，可以通过修改如下配置项，实现直接使用`./nodeos`命令来启动。
 
-```
+```ini
 # Enable block production, even if the chain is stale. (eosio::producer_plugin)
 # 在链是stale（旧的）情况下开启区块生成
 # 和启动命令中的-e对应
@@ -52,7 +52,7 @@ plugin = eosio::history_api_plugin
 
 同时，可以把`verbose-http-errors = false`改为`true`，可以在HTTP responses中增加错误日志，便于发现各种错误。
 
-```
+```ini
 # Append the error log to HTTP responses (eosio::http_plugin)
 # 在HTTP responses中增加错误日志
 verbose-http-errors = true

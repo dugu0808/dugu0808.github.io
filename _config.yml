@@ -12,11 +12,11 @@ baseurl: "/dugu0808.github.io"         # for example, '/blog' if your blog hoste
 
 # SNS settings
 RSS: false
-weibo_username:     18200267316
+#weibo_username:     18200267316
 zhihu_username:     liu-ke-78-4
 github_username:    dugu0808
 #twitter_username:  huxpro
-facebook_username:  dugu0808
+#facebook_username:  dugu0808
 
 
 

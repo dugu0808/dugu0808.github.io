@@ -13,14 +13,9 @@ tags:
 
 ## Catagory
 
-1. [keosd配置文件重要参数](#keosd配置文件重要参数)
-2. [本地调用rpc接口](#本地调用rpc接口)
-3. [从服务器调用rpc接口遇到的坑](#从服务器调用rpc接口遇到的坑)
-	1. [未开放端口](#未开放端口)
-	2. [http-validate-host参数](#http-validate-host参数)
-	3. [getman和postman测试](#getman和postman测试)
-	4. [nodeos的rpc接口调用](#nodeos的rpc接口调用)
-
+1. [本地测试网创建](#本地测试网创建)
+2. [加载系统合约后创建](#加载系统合约后创建)
+3. [常见问题](#常见问题)
 
 ## 本地测试网创建
 
@@ -99,13 +94,15 @@ ACTIVE_KEY为active权限的公钥。
 
 ```sh
 executed transaction: 472b05a94752cd13bd36d4ca8f33106a4cc0d2886685e1bd0031810c2211d4e9  200 bytes  1040 us
-#     cubetrain <= cubetrain::newaccount        {"creator":"cubetrain","name":"dlfjal","owner":{"threshold":1,"keys":[{"key":"SEAT6cjq6iQXTMBcdwQSPJ...
+#     eosio <= eosio::newaccount        {"creator":"eosio","name":"dlfjal","owner":{"threshold":1,"keys":[{"key":"EOS6cjq6iQXTMBcdwQSPJ...
 warning: transaction executed locally, but may not be confirmed by the network yet    ]
 ```
 
 这样就在本地测试网络创建了账户。
 
 ## 加载系统合约后创建
+
+
 
 ## 常见问题
 

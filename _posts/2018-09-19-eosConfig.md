@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "EOS配置文件config.ini"
+title:      "EOS节点配置文件config.ini"
 subtitle:   "EOS笔记"
 date:       2018-09-19
 author:     "Liu Ke"
@@ -8,6 +8,8 @@ header-img: "img/in-post/eos.jpg"
 tags:
     - EOS
 ---
+
+> eos v1.2.4
 
 ## cleos
 

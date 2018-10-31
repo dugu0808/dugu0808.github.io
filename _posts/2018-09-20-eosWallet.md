@@ -9,6 +9,8 @@ tags:
     - EOS
 ---
 
+> eos v1.2.4
+
 >参考资料：[EOS官方教程](https://developers.eos.io/eosio-nodeos/v1.2.0/docs/learn-about-wallets-keys-and-accounts-with-cleos "EOS官方教程")
 
 ## Catagory

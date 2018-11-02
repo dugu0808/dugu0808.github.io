@@ -102,9 +102,34 @@ warning: transaction executed locally, but may not be confirmed by the network y
 
 ## 加载系统合约后创建
 
+当启动了多节点主网，部署了`eosio.system`系统合约之后，就不能通过上面的方法创建账号。需要使用系统合约来创建账户，同时需要购买RAM、CPU和NET资源放在一个事务中。
 
+```sh
+cleos system newaccount
+``` 
 
 ## 常见问题
 
+##### Error 3120006
 
+```sh
+Error 3120006: No available wallet
+Ensure that you have created a wallet and have it open
+```
+
+没有创建钱包。使用`cleos wallet create --to-console`创建钱包。
+
+##### Error 3090003
+
+```sh
+Error 3090003: Provided keys, permissions, and delays do not satisfy declared authorizations
+Ensure that you have the related private keys inside your wallet and your wallet is unlocked.
+Error Details:
+transaction declares authority '{"actor":"cubetrain","permission":"active"}', but does not have signatures for it.
+```
+
+可能的情况：
+
+1. 配置文件中节点签名相关的私钥没有导入钱包
+2. 钱包未处于解锁状态
 

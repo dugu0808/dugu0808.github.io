@@ -11,6 +11,22 @@ tags:
 
 > eos v1.2.4
 
+
+## Catagory
+
+1. [创建钱包和密钥](#创建钱包和密钥)
+2. [导入私钥](#导入私钥)
+3. [修改创世节点和keosd配置文件](#修改创世节点和keosd配置文件)
+4. [启动nodeos节点服务](#启动nodeos节点服务)
+5. [创建系统账户](#创建系统账户)
+6. [部署系统合约并发行token](#部署系统合约并发行token)
+7. [创建节点账户和普通账户](#创建节点账户和普通账户)
+8. [注册出块节点](#注册出块节点)
+9. [其他节点配置和启动](#其他节点配置和启动)
+10. [投票质押赎回](#投票质押赎回)
+11. [解除eosio账户特权](#解除eosio账户特权)
+
+
 本文梳理一下由一个创世节点和三个出块节点启动eos测试主网，发行token，并实现出块节点轮流出块的过程。
 
 ### 创建钱包和密钥
@@ -49,8 +65,9 @@ http-server-address = 172.18.0.1:8888
 #bp节点间的访问地址，改成节点机器自己的IP，默认端口为9876
 p2p-listen-endpoint = 172.18.0.1:9876
 
+#节点的名字
 agent-name = "EOS test Agent"
-#出块的节点的名字，创世节点必须为eosio
+#出块的节点的账户名，创世节点必须为eosio
 producer-name = eosio
 
 #节点的私钥，创世节点不能修改私钥
@@ -149,11 +166,23 @@ cleos -u http://172.18.0.1:8888 system newaccount --transfer eosio user2 EOS6you
 
 投票的时候会有一个问题：如果是eosio账户直接转账出来的token进行抵押投票不会改变total_activated_stake的值，但是会影响投票比率。total_activated_stake除10000及为已经投票的token数量。所以这里eosio将准备投票的token先转给user1，再由user1转给user2进行投票。
 ```sh
-cleos -u http://172.18.0.1:8888 transfer eosio user1 "900000000.0000 EOS"
+cleos -u http://172.18.0.1:8888 transfer eosio user1 "900000000.0000 SYS"
 
-cleos -u http://172.18.0.1:8888 transfer user1 user2 "800000000.0000 EOS"
+cleos -u http://172.18.0.1:8888 transfer user1 user2 "800000000.0000 SYS"
 
 ```
+
+查看账户资金：
+
+```sh
+cleos -u http://172.18.0.1:8888 get currency balance eosio.token user2
+```
+
+获取账户和投票信息：
+```sh
+cleos -u http://172.18.0.1:8888 get account user2
+```
+
 
 ### 注册出块节点
 
@@ -166,12 +195,69 @@ cleos -u http://172.18.0.1:8888  system regproducer aaa EOS8b1DYUPTH6BE65jDxzqkP
 
 ```
 
+查看出块节点列表：
+
+```sh
+cleos -u http://172.18.0.1:8888 system listproducers
+```
+
 ### 其他节点配置和启动
 
+另外三个节点的`config.ini`配置文件主要修改的有：
+
+```ini
+#改为本机自己的IP
+bnet-endpoint = 
+
+#本地节点的rpc访问地址，改成创世节点机器自己的IP，默认端口为8888
+http-server-address = 
+
+#bp节点间的访问地址，改成节点机器自己的IP，默认端口为9876
+p2p-listen-endpoint = 
+
+#节点的名称
+agent-name = 
+#节点的账户名
+producer-name = 
+#节点的公私钥（需要妥善保存，不能上传到github等地方）
+signature-provider =
+ 
+enable-stale-production = false
+#添加除自己之外的所有节点的访问地址
+p2p-peer-address = 
+
+#添加另外三个bp节点的访问地址
+p2p-peer-address =
+
+# 可以改成一个较大的值，如3000,防止手动启动主网时报交易超时的错误
+max-transaction-time = 30
+
+#将这个参数设置为*可以保证通过get action操作获取到交易的信息
+filter-on = *
+
+#默认为1，改成false。如果设置为false，那么任何传入的“Host”报头都被认为是有效的。通过postman、getman等测试rpc接口就会正常调用。
+http-validate-host = false
+
+#添加启动节点服务时加载的插件
+plugin = eosio::chain_api_plugin
+plugin = eosio::history_plugin
+plugin = eosio::history_api_plugin
+plugin = eosio::producer_plugin
+plugin = eosio::chain_api_plugin
+plugin = eosio::history_plugin
+plugin = eosio::history_api_plugin
+plugin = eosio::producer_plugin
+```
+
+配置好之后，通过创世节点的`genesis.json`文件来分别启动这三个节点。需要注意的是，使用`genesis.json`文件启动仅限**第一次**启动，之后链正常运行时，启动节点直接用`nodeos`命令启动即可。`$GENESIS_DIR`为从创世节点拷贝过来的`genesis.json`文件所在的目录。
+
+```sh
+nodeos --genesis-json $GENESIS_DIR/genesis.json
+```
 
 ### 投票质押赎回
 
-**投票**：
+**投票**
 ```sh
 cleos -u http://172.18.0.1:8888  system voteproducer prods user2 aaa
 
@@ -183,12 +269,12 @@ cleos -u http://172.18.0.1:8888  system voteproducer prods user2 ccc
 
 投票的token数量为所有质押的token数量，包括CPU、NET和RAM资源。
 
-**查询抵押信息**：
+**查询抵押信息**
 ```sh
 cleos -u http://172.18.0.1:8888  system listbw user2
 ```
 
-**追加抵押增加票数**:
+**追加抵押增加票数**
 ```sh
 cleos -u http://172.18.0.1:8888 system delegatebw user2 aaa '100000000 SYS ' '100000000 SYS'
 
@@ -197,20 +283,43 @@ cleos -u http://172.18.0.1:8888 system delegatebw user2 bbb '100000000 SYS ' '10
 cleos -u http://172.18.0.1:8888 system delegatebw user2 ccc '100000000 SYS ' '100000000 SYS'
 ```
 
-**查看节点清单**：
+当总票数超过15%时，创世节点就会停止出块。然后三个bp节点就会开始轮流出块，主网启动。
+
+**查看出块节点列表**
 
 ```sh
 cleos -u http://172.18.0.1:8888 system listproducers
 ```
 
-**查看账户及投票信息**:
+**查看账户及投票信息**
 ```sh
 cleos -u http://172.18.0.1:8888 get account user2
 ```
 
-**赎回抵押**:
+**赎回抵押**
 
-赎回抵押同时撤销相应的票数，三天后到账返还的token。
+赎回抵押同时撤销相应的票数，三天后才能领取返还的token。
 ```sh
 cleos -u http://172.18.0.1:8888 system undelegatebw user2  user2 '0.02 SYS' '0.02 SYS'
+```
+
+**领取返还的token**
+```sh
+cleos push action eosio refund '["本人账户名"]' -p 本人账户名
+```
+
+**查询账户token数量**
+
+```sh
+cliseat -u http://172.17.14.9:8888 get currency balance cubetrain.tk samaritan
+```
+
+### 解除eosio账户特权
+
+主网启动之后，`eosio`账户仍有许多特权。对于我们自己的测试网络，这点可以不必考虑。但是如果是个开放的区块链项目，需要解除`eosio`账户的特权，可使用如下命令：
+
+```sh
+$ cleos push action eosio updateauth '{"account": "eosio", "permission": "owner", "parent": "", "auth": {"threshold": 1, "keys": [], "waits": [], "accounts": [{"weight": 1, "permission": {"actor": "eosio.prods", "permission": "active"}}]}}' -p eosio@owner
+$ cleos push action eosio updateauth '{"account": "eosio", "permission": "active", "parent": "owner", "auth": {"threshold": 1, "keys": [], "waits": [], "accounts": [{"weight": 1, "permission": {"actor": "eosio.prods", "permission": "active"}}]}}' -p eosio@active
+
 ```

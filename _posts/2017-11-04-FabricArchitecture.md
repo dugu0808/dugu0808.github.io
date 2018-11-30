@@ -7,7 +7,7 @@ author:     "Liu Ke"
 header-img: "img/BC.jpg"
 tags:
     - Blockchain区块链
-    - Hyperledger超级账本
+    - Hyperledger Fabric
 ---
 
 > 参考资料来源：巴比特

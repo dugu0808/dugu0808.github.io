@@ -77,7 +77,7 @@ Ubuntu：[https://docs.docker.com/install/linux/docker-ce/ubuntu/](https://docs.
 curl -fsSL https://get.docker.com | bash -s docker --mirror Aliyun
 ```
 
-安装完成后需要修改当前用户（我使用的用户叫ke）权限：
+安装完成后需要修改当前用户（我使用的用户叫ke）权限，将当前用户添加到docker用户组里：
 
 ```sh
 sudo usermod -aG docker ke

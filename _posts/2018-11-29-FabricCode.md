@@ -150,12 +150,14 @@ ubuntu:
 
 ```
 sudo apt-get install libltdl-dev
+sudo apt-get install jq
 ```
 
 CentOS:
 
 ```
 yum install -y git bzip2 gcc gcc-c++ libtool libltdl-dev libtool-ltdl-devel openssl
+yum install jq
 ``` 
 ### 编译fabic
 

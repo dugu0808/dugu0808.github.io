@@ -111,6 +111,8 @@ chmod +x /usr/local/bin/docker-compose
 ### 安装更新pip
 
 ```sh
+sudo apt-get update
+sudo apt-get install python-pip
 pip install --upgrade pip
 ```
 

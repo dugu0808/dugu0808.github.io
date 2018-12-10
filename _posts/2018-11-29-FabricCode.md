@@ -141,6 +141,8 @@ go get github.com/golang/protobuf/protoc-gen-go
 
 上面的`go get github.com/golang/lint/golint`可能会由于墙的原因无法安装成功，可以在[https://www.golangtc.com/download/package](https://www.golangtc.com/download/package)地址下载这个第三方包，并安装，链接内有详细安装教程。
 
+或者采用如下方法，先从github上clone对应的库，然后用`go install`进行安装。具体如下，打开`$GOPATH/src/golang.org/x`目录，然后执行`git clone https://github.com/golang/lint.git`来clone这`lint`包。clone完成之后，`cd lint/golint`，然后用命令安装golint包`go install`。或者在clone完成只有直接执行`go install golang.org/x/lint/golint`来进行安装。
+
 Fabric用到了go官方依赖管理工具dep，使用如下命令来安装：
 
 ```sh

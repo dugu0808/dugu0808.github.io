@@ -9,6 +9,8 @@ tags:
     - Hyperledger Fabric
 ---
 
+> fabric realse-1.3版本（v1.3）
+
 ## Catagory
 
 1. [安装配置go](#安装配置go)

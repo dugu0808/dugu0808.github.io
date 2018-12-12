@@ -120,6 +120,8 @@ sudo apt-get install python-pip
 sudo pip install --upgrade pip
 ```
 
+**安装nodejs和npm**。Hyperledger-Fabric目前貌似仅支持**-version 6.x**。可查看官方的详细说明：[https://nodejs.org/en/download/package-manager](https://nodejs.org/en/download/package-manager)。或者nodesource提供的安装教程[https://github.com/nodesource/distributions/blob/master/README.md#debinstall](https://github.com/nodesource/distributions/blob/master/README.md#debinstall)
+
 ### 安装go相关的工具
 
 由于`golang.org`这个网址被墙，我们需要从`github`获取到go相关的tool包，步骤如下：
@@ -129,6 +131,7 @@ mkdir –p $GOPATH/src/golang.org
 mkdir  $GOPATH/src/golang.org/x
 cd $GOPATH/src/golang.org/x
 git clone https://github.com/golang/tools.git
+git clone https://github.com/golang/lint.git
 ```
 
 通过如下命令安装fabric用到的一些go的工具：
@@ -142,6 +145,7 @@ go get github.com/axw/gocov/...
 go get github.com/client9/misspell/cmd/misspell
 go get github.com/AlekSi/gocov-xml
 go get github.com/golang/protobuf/protoc-gen-go
+go get -u github.com/golang/dep/cmd/dep
 ```
 
 上面的`go get github.com/golang/lint/golint`可能会由于墙的原因无法安装成功，可以在[https://www.golangtc.com/download/package](https://www.golangtc.com/download/package)地址下载这个第三方包，并安装，链接内有详细安装教程。
@@ -152,7 +156,6 @@ Fabric用到了go官方依赖管理工具dep，使用如下命令来安装：
 
 ```sh
 go get -u github.com/golang/dep/cmd/dep
-go install  github.com/golang/dep/cmd/dep
 ```
 
 ### 安装fabric的部分依赖库

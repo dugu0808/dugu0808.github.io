@@ -19,11 +19,12 @@ tags:
 4. [安装更新pip](#安装更新pip)
 5. [安装go相关的工具](#安装go相关的工具)
 6. [安装fabric的部分依赖库](#安装fabric的部分依赖库)
-7. [编译fabic](#编译fabic)
+8. [对go包做特殊处理](#对go包做特殊处理)
+9. [编译fabic](#编译fabic)
 	1. [编译orderer节点](#编译orderer节点)
 	2. [编译peer节点](#编译peer节点)
 	3. [fabric工具编译](#fabric工具编译)
-8. [生成docker镜像](#生成docker镜像)
+10. [生成docker镜像](#生成docker镜像)
 
 
 由于国内很多网址被墙，所以从源码编译需要一些步骤来处理。如果没有墙的存在，由源码编译非常简单，`git clone`了Fabric源码之后，配置好go的开发环境，然后直接使用一个`make all`命令即可完成所有的编译步骤。
@@ -173,6 +174,16 @@ CentOS:
 yum install -y git bzip2 gcc gcc-c++ libtool libltdl-dev libtool-ltdl-devel openssl
 yum install jq
 ``` 
+
+### 对go包做特殊处理
+
+先将之前下载的go相关的工具，拷贝到如下目录下：
+
+```sh
+mkdir -p .build/docker/gotools/bin
+cp ~/go/bin/* ~/go/src/github.com/hyperledger/fabric/.build/docker/gotools/bin
+```
+
 ### 编译fabic
 
 官方已经写好了所有的Makefile文件，所以可以在clone的fabric目录下，通过`make`命令来进行编译。
@@ -195,9 +206,8 @@ Binary available as .build/bin/orderer
 
 ##### 编译peer节点
 
-这步就需要对之前下载的go tool工具进行处理，来应对墙的存在。同时需要保证**没有ccenv和javaenv两个镜像**，如果有的话，需要使用`docker rmi`删除掉。
+这步需要**确保**对之前下载的go tool工具进行处理，来应对墙的存在。同时需要保证**没有ccenv和javaenv两个镜像**，如果有的话，需要使用`docker rmi`删除掉。
 
-先将之前下载的go tool工具，拷贝到如下目录下：
 
 ```sh
 mkdir -p .build/docker/gotools/bin

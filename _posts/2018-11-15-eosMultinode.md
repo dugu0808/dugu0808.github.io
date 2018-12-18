@@ -273,6 +273,54 @@ cleos -u http://172.18.0.1:8888  system voteproducer prods user2 ccc
 cleos -u http://172.18.0.1:8888  system listbw user2
 ```
 
+
+**查看已经投票的token总量**
+
+```sh
+cleos  -u http://172.18.0.1:8888 get table eosio eosio global
+
+# 会显示如下内容
+{
+  "rows": [{
+      "max_block_net_usage": 1048576,
+      "target_block_net_usage_pct": 1000,
+      "max_transaction_net_usage": 524288,
+      "base_per_transaction_net_usage": 12,
+      "net_usage_leeway": 500,
+      "context_free_discount_net_usage_num": 20,
+      "context_free_discount_net_usage_den": 100,
+      "max_block_cpu_usage": 200000,
+      "target_block_cpu_usage_pct": 1000,
+      "max_transaction_cpu_usage": 150000,
+      "min_transaction_cpu_usage": 100,
+      "max_transaction_lifetime": 3600,
+      "deferred_trx_expiration_window": 600,
+      "max_transaction_delay": 3888000,
+      "max_inline_action_size": 4096,
+      "max_inline_action_depth": 4,
+      "max_authority_depth": 6,
+      "max_ram_size": "68719476736",
+      "total_ram_bytes_reserved": 50948099,
+      "total_ram_stake": 13711100,
+      "last_producer_schedule_update": "2018-12-18T09:01:02.500",
+      "last_pervote_bucket_fill": "1545061578000000",
+      "pervote_bucket": 0,
+      "perblock_bucket": 0,
+      "total_unpaid_blocks": 101737,
+      "total_activated_stake": "2800200110000",
+      "thresh_activated_stake_time": "1545061577500000",
+      "last_producer_schedule_size": 3,
+      "total_producer_vote_weight": "14027788730150111232.00000000000000000",
+      "last_name_close": "2000-01-01T00:00:00.000"
+    }
+  ],
+  "more": false
+}
+
+```
+其中`total_activated_stake`除10000及为已经投票的token数量，这个数量达到全网15%之后，就会启动主网。
+
+
 **追加抵押增加票数**
 ```sh
 cleos -u http://172.18.0.1:8888 system delegatebw user2 aaa '100000000 SYS ' '100000000 SYS'

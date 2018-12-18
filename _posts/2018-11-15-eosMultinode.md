@@ -267,8 +267,7 @@ cleos -u http://172.18.0.1:8888  system voteproducer prods user2 ccc
 
 ```
 
-投票的token数量为所有质押的token数量，包括CPU、NET和RAM资源。
-
+投票的token数量为所有质押的token数量，包括CPU、NET资源。用户投票时，账户自身`staked`的所有token的，都算作票数。
 **查询抵押信息**
 ```sh
 cleos -u http://172.18.0.1:8888  system listbw user2

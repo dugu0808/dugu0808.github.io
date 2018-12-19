@@ -14,6 +14,21 @@ tags:
 > V release-1.3（fabric-samples）
 
 
+### Catagory
+
+1. [安装指定版本的node](#安装指定版本的node)
+2. [postgresql安装和配置](#postgresql安装和配置)
+3. [下载blockchain-explorer](#下载blockchain-explorer)
+4. [数据库安装](#数据库安装)
+5. [fabric配置区块浏览器](#fabric配置区块浏览器)
+6. [build](#build)
+7. [启动运行区块浏览器](#启动运行区块浏览器)
+8. [查看区块浏览器](#查看区块浏览器)
+
+
+
+
+
 本文基于`fabric-samples`启动的网络，搭建fabric的区块浏览器。Hyperledger项目方提供了`blockchain-explorer`这个开源的区块浏览器项目，支持fabric。
 
 首先先在机器上安装启动好fabric-samples里的`first-network`这个网络，具体过程可参考之前的文章[fabric-samples实践（搭建first-network）](http://keliu.me/2018/12/09/samples/)
@@ -47,7 +62,7 @@ n
 ![](https://raw.githubusercontent.com/dugu0808/dugu0808.github.io/master/img/in-post/181218/n.png)
 
 
-#### PostgreSQL安装和配置
+#### postgresql安装和配置
 
 官方下载文档：[Linux downloads (Red Hat family) ](https://www.postgresql.org/download/linux/redhat/)
 
@@ -254,3 +269,5 @@ cd blockchain-explorer/
 
 ![](https://raw.githubusercontent.com/dugu0808/dugu0808.github.io/master/img/in-post/181218/5.png)
 
+
+> 参考资料：[https://github.com/hyperledger/blockchain-explorer/tree/release-3.8](https://github.com/hyperledger/blockchain-explorer/tree/release-3.8)

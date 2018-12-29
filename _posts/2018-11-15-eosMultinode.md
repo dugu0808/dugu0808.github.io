@@ -234,9 +234,16 @@ max-transaction-time = 30
 
 #将这个参数设置为*可以保证通过get action操作获取到交易的信息
 filter-on = *
+access-control-allow-origin = *
+access-control-allow-headers = *
+access-control-allow-credentials = false
 
 #默认为1，改成false。如果设置为false，那么任何传入的“Host”报头都被认为是有效的。通过postman、getman等测试rpc接口就会正常调用。
 http-validate-host = false
+
+#最大交易时间，可以根据实际情况设置大一点，防止手动启动主网时因为超时而报错
+max-transaction-time = 3000
+
 
 #添加启动节点服务时加载的插件
 plugin = eosio::chain_api_plugin
@@ -248,6 +255,8 @@ plugin = eosio::history_plugin
 plugin = eosio::history_api_plugin
 plugin = eosio::producer_plugin
 ```
+
+所有设置自己ip都可以改为0.0.0.0。
 
 配置好之后，通过创世节点的`genesis.json`文件来分别启动这三个节点。需要注意的是，使用`genesis.json`文件启动仅限**第一次**启动，之后链正常运行时，启动节点直接用`nodeos`命令启动即可。`$GENESIS_DIR`为从创世节点拷贝过来的`genesis.json`文件所在的目录。
 

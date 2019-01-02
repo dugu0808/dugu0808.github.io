@@ -268,6 +268,23 @@ plugin = eosio::producer_plugin
 nodeos --genesis-json $GENESIS_DIR/genesis.json
 ```
 
+**注意参数：**
+```sh
+# 用于存储链状态的数据库尺寸,以兆为单位
+chain-state-db-size-mb = 10240
+
+# 用于存储链状态的数据库尺寸低于多少兆时安全的退出节点
+chain-state-db-guard-size-mb = 100
+
+# 用于存储不可逆的区块数据 的 数据库尺寸,以兆为单位
+reversible-blocks-db-size-mb = 10240
+
+# 用于存储不可逆区块的数据库尺寸低于多少兆时安全的退出节点
+reversible-blocks-db-guard-size-mb = 100
+```
+
+这几个参数也要注意，如果设置太小，节点会自关闭。会报数据库水平不安全错误。
+
 ### 投票质押赎回
 
 **投票**

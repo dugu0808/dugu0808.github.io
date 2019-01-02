@@ -232,6 +232,10 @@ p2p-peer-address =
 # 可以改成一个较大的值，如3000,防止手动启动主网时报交易超时的错误
 max-transaction-time = 30
 
+# 数据库相关的设置，如果设置过小，在网络运行过程中会报数据库错误而断掉
+chain-state-db-size-mb = 65535
+reversible-blocks-db-size-mb = 2048
+
 #将这个参数设置为*可以保证通过get action操作获取到交易的信息
 filter-on = *
 access-control-allow-origin = *

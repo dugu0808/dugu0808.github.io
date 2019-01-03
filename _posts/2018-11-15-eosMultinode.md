@@ -283,7 +283,20 @@ reversible-blocks-db-size-mb = 10240
 reversible-blocks-db-guard-size-mb = 100
 ```
 
-这几个参数也要注意，如果设置太小，节点会自关闭。会报数据库水平不安全错误。
+这几个参数也要注意，如果设置太小，后续节点可能会自关闭。网络运行一段时间后，可能会报数据库水平不安全错误：
+
+```sh
+Database has reached an unsafe level of usage, 
+shutting down to avoid corrupting the database.
+
+Please increase the value set for "chain-state-db-size-mb" and restart the process!
+Details: 3060101 database_guard_exception: Database usage is at unsafe levels
+database free: 134215280, guard size: 134217728
+    {"f":134215280,"g":134217728}
+    thread-0  controller.cpp:1627 validate_db_available_size
+
+shutdown..
+```
 
 ### 投票质押赎回
 

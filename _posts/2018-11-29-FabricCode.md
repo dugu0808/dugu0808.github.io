@@ -32,7 +32,7 @@ tags:
 ### 安装配置go  
   
 第一步，自然是安装和配置go的开发环境。对于ubuntu系统，如果直接使用`apt-get`方式安装go，版本会非常老。
-go官方的下载地址为[https://golang.org/dl/](https://golang.org/dl/ "https://golang.org/dl/")，但是这个地址被墙了，可以从go语言中文网下载[https://studygolang.com/dl/](https://studygolang.com/dl/)。
+go官方的下载地址为[https://golang.org/dl/](https://golang.org/dl/ "https://golang.org/dl/")，但是这个地址被墙了，可以从go语言中文网下载[https://studygolang.com/dl](https://studygolang.com/dl)。
 
 ```sh
 wget https://studygolang.com/dl/golang/go1.11.linux-amd64.tar.gz

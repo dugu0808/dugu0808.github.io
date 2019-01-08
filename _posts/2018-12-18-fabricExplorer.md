@@ -72,9 +72,14 @@ ubuntu对应的官方安装说明：[Linux downloads (Ubuntu)](https://www.postg
 
 Ubuntu 16.04 LTS：
 
+在指定目录下创建文件`/etc/apt/sources.list.d/pgdg.list`，并将如下一行添加到文件内：
+
 ```sh
 deb http://apt.postgresql.org/pub/repos/apt/ xenial-pgdg main
+```
 
+导入库的密钥，更新包列表。
+```sh
 wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
 sudo apt-get update
 

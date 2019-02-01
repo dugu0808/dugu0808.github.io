@@ -14,7 +14,7 @@ tags:
 > V release-1.3（fabric-samples）
 
 
-### Catagory
+### Contents
 
 1. [安装指定版本的node](#安装指定版本的node)
 2. [postgresql安装和配置](#postgresql安装和配置)

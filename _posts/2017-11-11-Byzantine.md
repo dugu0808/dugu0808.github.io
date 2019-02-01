@@ -13,7 +13,7 @@ tags:
 > This document is not completed and will be updated anytime.
 
 
-## Catagory
+## Contents
 
 1. [拜占庭将军问题](#拜占庭将军问题)
 	1. [问题描述](#问题描述)

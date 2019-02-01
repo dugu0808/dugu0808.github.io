@@ -13,7 +13,7 @@ tags:
 
 >参考资料：[EOS官方教程](https://developers.eos.io/eosio-nodeos/v1.2.0/docs/learn-about-wallets-keys-and-accounts-with-cleos "EOS官方教程")
 
-## Catagory
+## Contents
 
 1. [EOS账户体系](#EOS账户体系)
 	1. [原生权限](#原生权限)

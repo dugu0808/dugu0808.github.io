@@ -12,7 +12,7 @@ tags:
 > eos v1.4
 
 
-## Catagory
+## Contents
 
 1. [脚本相关](#脚本相关)
 2. [插件](#插件)

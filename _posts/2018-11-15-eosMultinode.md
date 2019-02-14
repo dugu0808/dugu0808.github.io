@@ -56,21 +56,27 @@ $ cleos wallet import
 node配置需要修改的参数有如下几个：
 
 ```ini
-#改为本机自己的IP
-bnet-endpoint = 172.18.0.1:4321
+#改为本机自己的IP或0.0.0.0
+bnet-endpoint = 0.0.0.0:4321
 
-#本地节点的rpc访问地址，改成创世节点机器自己的IP，默认端口为8888
-http-server-address = 172.18.0.1:8888
+#本地节点的rpc访问地址，节点自己的ip或者0.0.0.0，默认端口为8888
+http-server-address = 0.0.0.0:8888
 
 #bp节点间的访问地址，改成节点机器自己的IP，默认端口为9876
-p2p-listen-endpoint = 172.18.0.1:9876
+p2p-listen-endpoint = 0.0.0.0:9876
+
+#链状态数据库的大小，如果设置过小，可能会因链状态数据库处于不安全水平导致节点程序挂掉，与机器内存和硬盘空间有关，最好设置的与机器内存大小相近，默认的数值较小
+chain-state-db-size-mb = 7168
+
+# 链数据库可用空间低于这个数值，就会关闭节点程序
+chain-state-db-guard-size-mb = 128
 
 #节点的名字
 agent-name = "EOS test Agent"
 #出块的节点的账户名，创世节点必须为eosio
 producer-name = eosio
 
-#节点的私钥，创世节点不能修改私钥
+#节点的私钥，网络启动之后，创世节点不能修改私钥
 signature-provider = EOS6cDratMo8CQuEF4Xv1j4woaDaaiW7PagxVj3U8hckQTivq5toF=KEY:5KbHF8P67fJ4uqti6V85nzbufVLm5D2ogFretauDyAgfQ67t95V
 
 #创世节点必须为true
@@ -101,7 +107,7 @@ plugin = eosio::producer_plugin
 
 对于keosd配置文件，为`~/eos-wallet/config.ini`。keosd配置文件需要修改的：
 ```ini
-#本地节点的钱包服务keosd地址，改成创世节点机器自己的IP，默认端口为8888，需更改端口号使之与node节点端口号不同，避免冲突。我这里改为8889
+#本地节点的钱包服务keosd地址，改成创世节点机器自己的IP或者0.0.0.0，默认端口为8888，需更改端口号使之与node节点端口号不同，避免冲突。我这里改为8889
 http-server-address = 172.18.0.1:8889
 
 #默认为1，改成false。如果设置为false，那么任何传入的“Host”报头都被认为是有效的。通过postman、getman等测试钱包rpc接口就会正常调用。

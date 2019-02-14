@@ -108,7 +108,7 @@ plugin = eosio::producer_plugin
 对于keosd配置文件，为`~/eos-wallet/config.ini`。keosd配置文件需要修改的：
 ```ini
 #本地节点的钱包服务keosd地址，改成创世节点机器自己的IP或者0.0.0.0，默认端口为8888，需更改端口号使之与node节点端口号不同，避免冲突。我这里改为8889
-http-server-address = 172.18.0.1:8889
+http-server-address = 0.0.0.0:8889
 
 #默认为1，改成false。如果设置为false，那么任何传入的“Host”报头都被认为是有效的。通过postman、getman等测试钱包rpc接口就会正常调用。
 http-validate-host = false
@@ -164,17 +164,15 @@ cleos -u http://172.18.0.1:8888 system newaccount --transfer eosio bbb EOS7YQP2M
 cleos -u http://172.18.0.1:8888 system newaccount --transfer eosio ccc EOS8b1DYUPTH6BE65jDxzqkP95PxwStoPqfV4VWHiZX5z2sR2rVJw --stake-net "1000 SYS" --stake-cpu "1000 SYS" --buy-ram "1000 SYS"   
 
 cleos -u http://172.18.0.1:8888 system newaccount --transfer eosio user1 EOS5Vz3XzoBEjbk99yZU31cijzdLcYdADvjxWMFAQu6beUBTwdjWV --stake-net "1000 SYS" --stake-cpu "1000 SYS" --buy-ram "1000 SYS"   
-
-
-cleos -u http://172.18.0.1:8888 system newaccount --transfer eosio user2 EOS6you4AMUo4K7qoLGMkTrp7qLyMe5FtpBmsSUNsVKspQhKCNqzX --stake-net "1000 SYS" --stake-cpu "1000 SYS" --buy-ram "1000 SYS"   
- 
+   
 ```
 
-投票的时候会有一个问题：如果是eosio账户直接转账出来的token进行抵押投票不会改变total_activated_stake的值，但是会影响投票比率。total_activated_stake除10000及为已经投票的token数量。所以这里eosio将准备投票的token先转给user1，再由user1转给user2进行投票。
+投票的时候会有一个问题：如果是eosio账户直接转账出来的token进行抵押投票不会改变total_activated_stake的值，但是会影响投票比率。total_activated_stake除10000及为已经投票的token数量。所以这里eosio将准备投票的token先转给user1，然后**user2直接由user1创建，创建的时候就给user2配置好足够的net和cpu**，这样的话，创建完成之后，user2直接进行投票操作即可。
+
 ```sh
 cleos -u http://172.18.0.1:8888 transfer eosio user1 "900000000.0000 SYS"
 
-cleos -u http://172.18.0.1:8888 transfer user1 user2 "800000000.0000 SYS"
+cleos -u http://172.18.0.1:8888 system newaccount --transfer eosio user2 EOS6you4AMUo4K7qoLGMkTrp7qLyMe5FtpBmsSUNsVKspQhKCNqzX --stake-net "400000000 SYS" --stake-cpu "400000000 SYS" --buy-ram "1000 SYS" 
 
 ```
 
@@ -195,9 +193,9 @@ cleos -u http://172.18.0.1:8888 get account user2
 ```sh
 cleos -u http://172.18.0.1:8888  system regproducer aaa EOS7V5hcYss6e89yK7W5Kq4x9iXWHM64F4VWHQdhP4TTakAJYjLgS
 
-cleos -u http://172.18.0.1:8888  system regproducer aaa EOS7YQP2MxbRbSqJJ89VZJBqs44biQkzqDQj3Cxb8hVaXWZdUYpcm
+cleos -u http://172.18.0.1:8888  system regproducer bbb EOS7YQP2MxbRbSqJJ89VZJBqs44biQkzqDQj3Cxb8hVaXWZdUYpcm
 
-cleos -u http://172.18.0.1:8888  system regproducer aaa EOS8b1DYUPTH6BE65jDxzqkP95PxwStoPqfV4VWHiZX5z2sR2rVJw
+cleos -u http://172.18.0.1:8888  system regproducer ccc EOS8b1DYUPTH6BE65jDxzqkP95PxwStoPqfV4VWHiZX5z2sR2rVJw
 
 ```
 
@@ -228,6 +226,7 @@ producer-name =
 #节点的公私钥（需要妥善保存，不能上传到github等地方）
 signature-provider =
  
+#除创世节点外，其他节点该配置项都设置为false
 enable-stale-production = false
 #添加除自己之外的所有节点的访问地址
 p2p-peer-address = 

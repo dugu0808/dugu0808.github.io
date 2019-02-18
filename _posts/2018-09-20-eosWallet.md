@@ -74,7 +74,7 @@ Without password imported keys will not be retrievable.
 ```
 创建成功，并返回钱包的密码，每隔900秒钱包就会自动锁定，需要这个密码来解锁。默认情况下，keosd会将钱包存储在`~/eosio-wallet`文件夹中，生成对应的`钱包名.wallet`文件。
 
-在此`~/eosio-wallet`文件夹中除了钱包文件外，还有**keosd配置文件config.in**i。
+在此`~/eosio-wallet`文件夹中除了钱包文件外，还有**keosd配置文件config.ini**。
 
 使用`-n`来创建自定义名称的钱包：
 
@@ -196,16 +196,27 @@ $ cleos wallet private_keys -n ke --password PW5HufPPfYCWE5nM6BFKwqUq6eW28sRXisr
 
 ## 创建账户
 
-创建EOS账户主要有以下步骤：
+账户名规则：
+
+1. 为12个字符
+2. 只能包含以下符号：.12345abcdefghijklmnopqrstuvwxyz
+
+对于自己搭建的eos私链，只有系统账户eosio才可以创建小于12个字符的账户，其他账户只能创建12位的账户。如需短账户名，择需`bid`竞标。
+
+当系统合约没有部署的时候，创建EOS账户主要有以下步骤：
 
 1. 创建钱包
 2. 创建密钥对
 3. 注册账户
 4. 钱包导入私钥
 
-账户名规则：
+当部署了系统合约之后，直接使用系统合约来创建，`system newaccount`命令形式如下：
 
-1. 为12个字符
-2. 只能包含以下符号：.12345abcdefghijklmnopqrstuvwxyz
+```sh
+cleos system newaccount --transfer useruseruser newnewnewnew  EOS5aNCeePuH2hQnaXrkNABex2qZeVWg3j8ikckbQm9EnWuFE13YD --stake-net "1.5000 EOS" --stake-cpu "4.0000 EOS" --buy-ram "4.5000 EOS"
+```
+
+创建账户时，需要给新账户配置系统资源，有两种方式。一种是直接确定EOS的数量，系统会根据当前资源的行情来自动换算成对应数量的资源。另一种是指明资源的具体数量，如以`bytes`为单位的值。
+
 
 
